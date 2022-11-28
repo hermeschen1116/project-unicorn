@@ -1,2 +1,2 @@
-# project-unicorn
+# Project Unicorn
 machine learning final project
