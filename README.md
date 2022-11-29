@@ -33,8 +33,9 @@
 [//]: # (&#40;Describe of product solutions and techniques&#41;)
 
 ### Tech Stack
+- Python 3.10.8
 - Pytorch Lightning
--
+- Pandas
 
 ### Architecture
 [//]: # (I will put a graph here)
