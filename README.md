@@ -4,6 +4,13 @@
 ## Motivation and Goal
 
 - **Motivation**
+
+	At first, we wanted to build a model to predict stock based on the analysis of ptt users' discussion.
+  	After some research, we found that idea is somewhat difficult for us.
+  	But fortunately, we discovered an interesting data set on Kaggle which is about the start-ups.
+  	Also, it's related to our original idea, so we came up with a new plan based on this data set.
+
+	[Startups Valued at $1 Billion or More](https://www.kaggle.com/datasets/thedevastator/startups-valued-at-1-billion-or-more)
 - **Goal**
 
 ## Related Work / Market Survey
@@ -35,7 +42,7 @@
 ### Tech Stack
 - Python 3.10.8
 - Pytorch Lightning
-- Pandas
+-
 
 ### Architecture
 [//]: # (I will put a graph here)
