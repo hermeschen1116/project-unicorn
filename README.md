@@ -21,6 +21,7 @@
 ## Related Work / Market Survey
 
 ### What is "Unicorn" ?
+The term unicorn refers to a privately held startup company with a value of over $1 billion.
 
 ### CrunchBase
 
@@ -28,6 +29,7 @@
 
 - **Investors** that are seeking a practical way to know if a start-up will become a unicorn.
 - People that are **seeking the chance to enter a start-up**.
+- **Startup founders** who want to evaluate the their own or other's company by objective index(s).
 
 ## Explanation of Product Features
 
