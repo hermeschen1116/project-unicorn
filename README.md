@@ -9,12 +9,14 @@
   At first, we wanted to build a model to predict stock based on the analysis of ptt users' discussion.
   After some research, we found that idea is somewhat difficult for us.
   But fortunately, we discovered an interesting data set on Kaggle which is about the start-ups.
-  Also, it's related to our original idea, so we came up with a new plan based on this data set.
+  Also, it's related to our original idea about predicting prospect of a stock/company, so we came up with a new plan based on this data set.
 
   [Startups Valued at $1 Billion or More](https://www.kaggle.com/datasets/thedevastator/startups-valued-at-1-billion-or-more)
 - **Goal**
 	- Provide a interactive and fun way to know about start-ups.
     - Give some possible invest targets.
+	- Find out the key traits of a company to be successful.
+	- Passing the class.
 
 ## Related Work / Market Survey
 
