@@ -14,13 +14,14 @@
   [Startups Valued at $1 Billion or More](https://www.kaggle.com/datasets/thedevastator/startups-valued-at-1-billion-or-more)
 - **Goal**
 	- Provide a interactive and fun way to know about start-ups.
-    - Give some possible invest targets.
+	- Give some possible invest targets.
 	- Find out the key traits of a company to be successful.
 	- Passing the class.
 
 ## Related Work / Market Survey
 
 ### What is "Unicorn" ?
+
 The term unicorn refers to a privately held startup company with a value of over $1 billion.
 
 ### CrunchBase
@@ -52,8 +53,10 @@ The term unicorn refers to a privately held startup company with a value of over
 ### Tech Stack
 
 - Python 3.10.8
-- Pytorch Lightning
--
+- [PyTorch](https://github.com/pytorch/pytorch)
+- [PyTorch Lightning](https://github.com/pytorch/pytorch)
+- [Rust](https://github.com/rust-lang/rust)
+- [Tauri](https://github.com/tauri-apps/tauri)
 
 ### Architecture
 
