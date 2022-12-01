@@ -26,6 +26,9 @@ The term unicorn refers to a privately held startup company with a value of over
 
 ### CrunchBase
 
+A web database about start-ups, including various type of data such as founder, finance, and investors, etc.
+The original source of the data set we use is from here.
+
 ## Users
 
 - **Investors** that are seeking a practical way to know if a start-up will become a unicorn.
@@ -60,3 +63,7 @@ The term unicorn refers to a privately held startup company with a value of over
 
 ### Architecture
 ![architecture](architecture.png)
+
+## Reference
+
+[//]: # (https://ithelp.ithome.com.tw/articles/10252383?sc=pt)
