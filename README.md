@@ -59,5 +59,4 @@ The term unicorn refers to a privately held startup company with a value of over
 - [Tauri](https://github.com/tauri-apps/tauri)
 
 ### Architecture
-
-[//]: # (I will put a graph here)
+![architecture](architecture.png)
