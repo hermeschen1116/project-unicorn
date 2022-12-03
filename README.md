@@ -1,4 +1,4 @@
-![logo](./media/unicorn.png)
+![logo](./media/unicorn.png)  
 # Project Unicorn
 
 > NCU machine learning course final project
@@ -36,7 +36,7 @@ The feature of explanatory value used for fitting the model will be company’s 
  In order to gain these features ,we consider to use the data from CrunchBase,a web database about start-ups, including various type of data such as founder, finance, and investors, etc.
 
 
-The original source of the data set we use is from here.
+The original source of the data set we use is from here.  
 ![architecture](./media/crunchbase.png)
 
 ## Users
@@ -49,8 +49,7 @@ The original source of the data set we use is from here.
 
 ### Backend: NT-D
 
-> Algorithm to Predict the Future Development of Start-up Companies
-
+> Algorithm to Predict the Future Development of Start-up Companies  
 <img src="./media/NT-D.png" alt="ntd" width=30%/>
 
 ### Frontend: La+ Program
@@ -61,7 +60,7 @@ Since we won’t want users to see directly into our code, we will have a UI for
 
 - Features
 - [ ] Show the possibility if a start-up will become a unicorn.
-- [ ] Show what are in common between unicorns.
+- [ ] Show what are in common between unicorns.  
 ![architecture](./media/LAprogram.png)
 
 ## The Solution Architecture
@@ -81,7 +80,7 @@ Rust is memory-efficient; it can power performance-critical services, run on emb
 - [Tauri](https://github.com/tauri-apps/tauri)  
 Tauri is a framework for building tiny, blazingly fast binaries for all major desktop platforms. Developers can integrate any front-end framework that compiles to HTML, JS and CSS for building their user interface. The backend of the application is a rust-sourced binary with an API that the front-end can interact with.
 
-### Architecture
+### Architecture  
 ![architecture](./media/architecture.png)
 
 ## Reference
