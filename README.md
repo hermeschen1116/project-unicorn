@@ -27,7 +27,7 @@
 
 Our work is to know the potential of this company whether it could become a “Unicorn” company or not, in the other word, the probability of becoming a “Unicorn” company will be our target value. 
 
-The feature of explanatory value used for fitting the model will be company’s funding date, industries, financial, people, technology.
+The feature of explanatory value used for fitting the model will be company’s funding date, industries, financial, people, technology.  
 ![architecture](./media/WhatisUnicorn.png)
 
 
