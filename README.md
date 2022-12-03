@@ -1,3 +1,4 @@
+![logo](unicorn.png)
 # Project Unicorn
 
 > NCU machine learning course final project
