@@ -1,5 +1,8 @@
 from pprint import pprint
 
+import pandas as pd
+
+
 group_count: int = 0
 group: list = []
 data: list = []
@@ -12,11 +15,16 @@ with open('original_source.txt', 'r', encoding='UTF-8') as source:
 			group = []
 			continue
 		tmp = line.strip().strip('\n')
-		if tmp == '-':
+		if tmp == '-' or tmp == '':
 			group.append('')
 			group_count += 1
 			continue
-		if group_count < 2:
+		if group_count < 1:
+			group_count += 1
+			continue
+		if group_count == 1:
+			if tmp.lower().find('logo') == -1:
+				group.append(tmp.strip().strip('\n'))
 			group_count += 1
 			continue
 		if group_count == 2 or group_count == 5 or group_count == 6 or group_count == 7:
@@ -33,25 +41,17 @@ with open('original_source.txt', 'r', encoding='UTF-8') as source:
 			group.append(tmp[-1].strip())
 		if group_count == 8 or group_count == 11:
 			group.append(tmp[1::].replace(',', ''))
-		if group_count == 9:
-			if tmp.lower().find('non'):
-				group.append('Y')
-			elif tmp.lower() == 'for profit':
-				group.append('N')
-			else:
-				group.append(tmp)
-		if group_count == 10:
-			if tmp.lower() == 'active':
-				group.append('Y')
-			elif tmp.lower() == 'closed':
-				group.append('N')
-			else:
-				group.append(tmp)
+		if group_count == 9 or group_count == 10:
+			group.append(tmp.lower())
 		group_count += 1
 
 with open('source.csv', 'w', encoding='UTF-8') as output:
-	output.write('Company, Found Date, City, Nation, Industry, Founder, Investor, Total Founding, Company Type, Operating Status, Last Valuation\n')
+	output.write('Company,Founded Year,City,Nation,Industry,Founder,Investor,Total Founding,Company Type,Operating Status,Last Valuation\n')
 	for sample in data:
-		tmp = [s if s != '—' or s != '' else '' for s in sample]
-		output.write(', '.join(tmp)+'\n')
+		tmp = [s if s != '—' and s != '' else '' for s in sample]
+		output.write(','.join(tmp)+'\n')
+
+# dataset = pd.read_csv('source.csv', sep=',', encoding='utf-8')
+# dataset.drop_duplicates()
+# dataset.to_csv('source.csv', encoding='utf-8')
 

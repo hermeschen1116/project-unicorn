@@ -39539,30 +39539,6 @@ For Profit
 Active
 —
 
-
-Organization Name
-
-Founded Date
-
-Headquarters Location
-
-Industries
-
-Founders
-
-Top 5 Investors
-
-Total Funding Amount
-
-Company Type
-
-Operating Status
-
-
-Most Recent Valuation
-
-ADD COLUMN
-
 51.
 Telepathy Logo
 Telepathy
@@ -47963,30 +47939,6 @@ For Profit
 Active
 —
 
-
-Organization Name
-
-Founded Date
-
-Headquarters Location
-
-Industries
-
-Founders
-
-Top 5 Investors
-
-Total Funding Amount
-
-Company Type
-
-Operating Status
-
-
-Most Recent Valuation
-
-ADD COLUMN
-
 701.
 PEX Logo
 PEX
@@ -52512,8 +52464,6 @@ Salvador Betancourt-Ramirez
 For Profit
 Active
 —
-
-
 
 51.
 La Blanche Logo
@@ -60881,8 +60831,6 @@ Bekir Çelik, Erol Kabadayi
 For Profit
 Active
 —
-
-
 
 701.
 Stockholm Techstars Accelerator Logo
@@ -70596,8 +70544,6 @@ Ethos Family Office
 For Profit
 Active
 —
-
-
 
 451.
 Truflation Logo
@@ -88718,8 +88664,6 @@ For Profit
 Active
 —
 
-
-
 851.
 Storfund Logo
 Storfund
@@ -93919,30 +93863,6 @@ $1,500,000
 For Profit
 Active
 $4,500,000
-
-
-Organization Name
-
-Founded Date
-
-Headquarters Location
-
-Industries
-
-Founders
-
-Top 5 Investors
-
-Total Funding Amount
-
-Company Type
-
-Operating Status
-
-
-Most Recent Valuation
-
-ADD COLUMN
 
 251.
 MIODx Logo
@@ -110841,8 +110761,6 @@ $85,400,000
 For Profit
 Active
 $350,000,000
-
-
 
 551.
 Terminus Logo
