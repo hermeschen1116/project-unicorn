@@ -50,7 +50,7 @@ The original source of the data set we use is from here.
 ### Backend: NT-D
 
 > Algorithm to Predict the Future Development of Start-up Companies
-<img src="./media/NT-D.png" alt="ntd" width=30%/>
+![NT-D](documents/media/NT-D.png)
 
 ### Frontend: La+ Program
 
