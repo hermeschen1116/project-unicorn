@@ -1,4 +1,4 @@
-![logo](./media/unicorn.png)  
+![logo](documents/media/unicorn.png)
 # Project Unicorn
 
 > NCU machine learning course final project
@@ -23,12 +23,12 @@
 
 ### What is "Unicorn" ?
 
-“Unicorn”, Aileen Lee called a successful company, refers to a privately held startup company with a value of over $1 billion. 
+“Unicorn”, Aileen Lee called a successful company, refers to a privately held startup company with a value of over $1 billion.
 
-Our work is to know the potential of this company whether it could become a “Unicorn” company or not, in the other word, the probability of becoming a “Unicorn” company will be our target value. 
+Our work is to know the potential of this company whether it could become a “Unicorn” company or not, in the other word, the probability of becoming a “Unicorn” company will be our target value.
 
-The feature of explanatory value used for fitting the model will be company’s funding date, industries, financial, people, technology.  
-![architecture](./media/WhatisUnicorn.png)
+The feature of explanatory value used for fitting the model will be company’s funding date, industries, financial, people, technology.
+![architecture](documents/media/WhatisUnicorn.png)
 
 
 ### CrunchBase
@@ -36,8 +36,8 @@ The feature of explanatory value used for fitting the model will be company’s 
  In order to gain these features ,we consider to use the data from CrunchBase,a web database about start-ups, including various type of data such as founder, finance, and investors, etc.
 
 
-The original source of the data set we use is from here.  
-![architecture](./media/crunchbase.png)
+The original source of the data set we use is from here.
+![architecture](documents/media/crunchbase.png)
 
 ## Users
 
@@ -49,7 +49,7 @@ The original source of the data set we use is from here.
 
 ### Backend: NT-D
 
-> Algorithm to Predict the Future Development of Start-up Companies  
+> Algorithm to Predict the Future Development of Start-up Companies
 <img src="./media/NT-D.png" alt="ntd" width=30%/>
 
 ### Frontend: La+ Program
@@ -60,8 +60,8 @@ Since we won’t want users to see directly into our code, we will have a UI for
 
 - Features
 - [ ] Show the possibility if a start-up will become a unicorn.
-- [ ] Show what are in common between unicorns.  
-![architecture](./media/LAprogram.png)
+- [ ] Show what are in common between unicorns.
+![architecture](documents/media/LAprogram.png)
 
 ## The Solution Architecture
 
@@ -69,19 +69,19 @@ Since we won’t want users to see directly into our code, we will have a UI for
 
 ### Tech Stack
 
-- Python 3.10.8  
+- Python 3.10.8
 powerful programming language, able to use the package we need.*
-- [PyTorch](https://github.com/pytorch/pytorch)  
+- [PyTorch](https://github.com/pytorch/pytorch)
 PyTorch has tensor computation (like NumPy) with strong GPU acceleration to shorten our training time. DNN we used will be built on a tape-based autograd system. NumPy, SciPy, and Cython are all able to extend PyTorch. PyTorch also has multiprocessing which is useful for data loading and Hogwild training.
-- [PyTorch Lightning](https://github.com/pytorch/pytorch)  
+- [PyTorch Lightning](https://github.com/pytorch/pytorch)
 PyTorch Lightning can make the PyTorch model easier to build, connect, optimize.
-- [Rust](https://github.com/rust-lang/rust)  
+- [Rust](https://github.com/rust-lang/rust)
 Rust is memory-efficient; it can power performance-critical services, run on embedded devices, and easily integrate with other languages. It is also memory-safety and thread-safety. Publish to the network would have more reliability by using Rust.
-- [Tauri](https://github.com/tauri-apps/tauri)  
+- [Tauri](https://github.com/tauri-apps/tauri)
 Tauri is a framework for building tiny, blazingly fast binaries for all major desktop platforms. Developers can integrate any front-end framework that compiles to HTML, JS and CSS for building their user interface. The backend of the application is a rust-sourced binary with an API that the front-end can interact with.
 
-### Architecture  
-![architecture](./media/architecture.png)
+### Architecture
+![architecture](documents/media/architecture.png)
 
 ## Reference
 
