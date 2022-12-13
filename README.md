@@ -50,6 +50,7 @@ The original source of the data set we use is from here.
 ### Backend: NT-D
 
 > Algorithm to Predict the Future Development of Start-up Companies
+
 ![NT-D](documents/media/NT-D.png)
 
 ### Frontend: La+ Program
@@ -61,6 +62,7 @@ Since we won’t want users to see directly into our code, we will have a UI for
 - Features
 - [ ] Show the possibility if a start-up will become a unicorn.
 - [ ] Show what are in common between unicorns.
+
 ![architecture](documents/media/LAprogram.png)
 
 ## The Solution Architecture
