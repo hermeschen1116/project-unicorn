@@ -20,7 +20,7 @@ class CSVDataset(Dataset):
 		return len(self.__label)
 
 
-class QADataModule(pl.LightningDataModule):
+class DataModule(pl.LightningDataModule):
 	def __init__(self, data: DataFrame, train_partition: float = 0.9, num_worker: int = 4, batch_size: int = 8):
 		super().__init__()
 		self.save_hyperparameters(logger=False)
@@ -32,7 +32,7 @@ class QADataModule(pl.LightningDataModule):
 		self.__num_folds: Optional[int] = None
 		# datasets
 		self.__folds: Optional[list] = None
-		self.__train_data: Optional[Dataset] = CSVDataset(data, 'Unicorn')
+		self.__train_data: Optional[CSVDataset] = CSVDataset(data, 'Unicorn')
 		self.__train_folds: Optional[Subset] = None
 		self.__valid_folds: Optional[Subset] = None
 		self.__test_set: Optional[Dataset] = None
@@ -41,8 +41,8 @@ class QADataModule(pl.LightningDataModule):
 		return
 
 	def setup(self, stage: str) -> None:
-		train_data_partition = int(len(self.__val_set) * self.__train_partition)
-		test_data_partition = len(self.__val_set) - train_data_partition
+		train_data_partition: int = int(len(self.__train_data) * self.__train_partition)
+		test_data_partition: int = len(self.__train_data) - train_data_partition
 		self.__train_data, self.__test_set = random_split(self.__train_data, [train_data_partition, test_data_partition])
 
 	def setup_folds(self, num_folds: int = 5) -> None:
@@ -50,7 +50,7 @@ class QADataModule(pl.LightningDataModule):
 		self.__folds = [fold for fold in KFold(num_folds).split(range(len(self.__train_data)))]
 
 	def setup_fold_index(self, fold_index: int) -> None:
-		train_index, valid_index = self.splits[fold_index]
+		train_index, valid_index = self.__folds[fold_index]
 		self.__train_folds = Subset(self.__train_data, train_index)
 		self.__valid_folds = Subset(self.__train_data, valid_index)
 
