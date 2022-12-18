@@ -1,12 +1,10 @@
-from abc import ABC, abstractmethod
 from typing import Optional
 
 import numpy as np
 import pytorch_lightning as pl
 from pandas import DataFrame
-from sklearn.model_selection import KFold
 from torch import tensor
-from torch.utils.data import DataLoader, Dataset, random_split, Subset
+from torch.utils.data import DataLoader, Dataset, random_split
 
 
 class CSVDataset(Dataset):
@@ -21,18 +19,8 @@ class CSVDataset(Dataset):
 		return len(self.__label)
 
 
-class BaseKFoldDataModule(pl.LightningDataModule, ABC):
-	@abstractmethod
-	def setup_folds(self, num_folds: int) -> None:
-		pass
-
-	@abstractmethod
-	def setup_fold_index(self, fold_index: int) -> None:
-		pass
-
-
-class DataModule(BaseKFoldDataModule):
-	def __init__(self, data: DataFrame, train_partition: float = 0.9, num_worker: int = 4, batch_size: int = 8):
+class DataModule(pl.LightningDataModule):
+	def __init__(self, data: DataFrame, train_partition: float = 0.8, num_worker: int = 4, batch_size: int = 8):
 		super().__init__()
 		self.save_hyperparameters(logger=False)
 
@@ -40,36 +28,26 @@ class DataModule(BaseKFoldDataModule):
 		self.__train_partition: float = train_partition
 		self.__num_worker: int = num_worker
 		self.__batch_size: int = batch_size
-		self.__num_folds: Optional[int] = None
 		# datasets
-		self.__folds: Optional[list] = None
-		self.__train_data: Optional[CSVDataset] = CSVDataset(data, 'Unicorn')
-		self.__train_folds: Optional[Subset] = None
-		self.__valid_folds: Optional[Subset] = None
+		self.__train_set: Optional[CSVDataset] = CSVDataset(data, 'Unicorn')
+		self.__valid_set: Optional[CSVDataset] = None
 		self.__test_set: Optional[Dataset] = None
 
 	def prepare_data(self) -> None:
 		return
 
 	def setup(self, stage: str) -> None:
-		train_data_partition: int = int(len(self.__train_data) * self.__train_partition)
-		test_data_partition: int = len(self.__train_data) - train_data_partition
-		self.__train_data, self.__test_set = random_split(self.__train_data, [train_data_partition, test_data_partition])
-
-	def setup_folds(self, num_folds: int = 5) -> None:
-		self.__num_folds = num_folds
-		self.__folds = [fold for fold in KFold(num_folds).split(range(len(self.__train_data)))]
-
-	def setup_fold_index(self, fold_index: int) -> None:
-		train_index, valid_index = self.__folds[fold_index]
-		self.__train_folds = Subset(self.__train_data, train_index)
-		self.__valid_folds = Subset(self.__train_data, valid_index)
+		test_data_partition: int = int(len(self.__train_set) * 0.1)
+		train_data_partition: int = len(self.__train_set) - test_data_partition
+		valid_data_partition: int = int(train_data_partition * (1 - self.__train_partition))
+		train_data_partition -= valid_data_partition
+		self.__train_set, self.__valid_set, self.__test_set = random_split(self.__train_set, [train_data_partition, valid_data_partition, test_data_partition])
 
 	def train_dataloader(self) -> DataLoader:
-		return DataLoader(self.__train_folds, shuffle=True, batch_size=self.__batch_size, num_workers=self.__num_worker)
+		return DataLoader(self.__train_set, shuffle=True, batch_size=self.__batch_size, num_workers=self.__num_worker)
 
 	def val_dataloader(self) -> DataLoader:
-		return DataLoader(self.__valid_folds, batch_size=self.__batch_size, num_workers=self.__num_worker)
+		return DataLoader(self.__valid_set, batch_size=self.__batch_size, num_workers=self.__num_worker)
 
 	def test_dataloader(self) -> DataLoader:
 		return DataLoader(self.__test_set, batch_size=self.__batch_size, num_workers=self.__num_worker)

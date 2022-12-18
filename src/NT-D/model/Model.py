@@ -1,12 +1,10 @@
-from typing import Any
-
-import pytorch_lightning as torch_lightning
+import pytorch_lightning as pl
 from torch import optim
 
 
-class QAModel(torch_lightning.LightningModule):
-	def __init__(self, tokenizer: Any, learning_rate: float = 1e-4):
-		super(QAModel, self).__init__()
+class Model(pl.LightningModule):
+	def __init__(self, learning_rate: float = 1e-4):
+		super(Model, self).__init__()
 
 	def configure_optimizers(self):
 		return optim.Adam(self.parameters(), lr=self.learning_rate)
