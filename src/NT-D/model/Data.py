@@ -1,3 +1,4 @@
+from abc import ABC, abstractmethod
 from typing import Optional
 
 import numpy as np
@@ -20,7 +21,17 @@ class CSVDataset(Dataset):
 		return len(self.__label)
 
 
-class DataModule(pl.LightningDataModule):
+class BaseKFoldDataModule(pl.LightningDataModule, ABC):
+	@abstractmethod
+	def setup_folds(self, num_folds: int) -> None:
+		pass
+
+	@abstractmethod
+	def setup_fold_index(self, fold_index: int) -> None:
+		pass
+
+
+class DataModule(BaseKFoldDataModule):
 	def __init__(self, data: DataFrame, train_partition: float = 0.9, num_worker: int = 4, batch_size: int = 8):
 		super().__init__()
 		self.save_hyperparameters(logger=False)
