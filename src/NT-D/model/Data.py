@@ -1,5 +1,21 @@
+import numpy as np
+
 import pytorch_lightning as pl
-from torch.utils.data import DataLoader
+from pandas import DataFrame
+from torch import tensor
+from torch.utils.data import DataLoader, Dataset
+
+
+class CSVDataset(Dataset):
+	def __init__(self, data_set: DataFrame, label_feature: str):
+		self.__data: tensor = tensor(data_set.drop(label_feature, axis=1).astype(np.float))
+		self.__label: tensor = tensor(data_set[label_feature].astype(np.int))
+
+	def __getitem__(self, index) -> (tensor, tensor):
+		return self.__data[index], self.__label[index]
+
+	def __len__(self) -> int:
+		return len(self.__label)
 
 
 class QADataModule(pl.LightningDataModule):
