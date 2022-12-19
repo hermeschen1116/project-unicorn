@@ -40,7 +40,7 @@ class Model(pl.LightningModule):
 		train_loss = self.__loss_fn(predict_batch.flatten(), label_batch)
 
 		# log
-		self.log('loss', train_loss, on_epoch=True, prog_bar=True)
+		self.log('loss', train_loss, on_epoch=True, on_step=True, prog_bar=True)
 
 		return {'loss': train_loss}
 
@@ -52,7 +52,7 @@ class Model(pl.LightningModule):
 		valid_loss = self.__loss_fn(predict_batch.flatten(), label_batch)
 
 		# log
-		self.log('valid_loss', valid_loss, on_epoch=True, prog_bar=True)
+		self.log('valid_loss', valid_loss, on_epoch=True, on_step=True, prog_bar=True)
 
 		return {'valid_loss': valid_loss}
 
@@ -72,7 +72,7 @@ class Model(pl.LightningModule):
 		all_truth: Tensor = self.stack_output([batch['truth_batch'] for batch in batch_output])
 		metric = BinaryAccuracy()
 		accuracy = metric(all_predict, all_truth)
-		self.log('Accuracy', accuracy, on_epoch=True, prog_bar=True)
+		self.log('Accuracy', accuracy, on_epoch=True, on_step=True, prog_bar=True)
 		print('Test Accuracy: {:.2f}'.format(accuracy))
 
 	def on_test_epoch_end(self) -> None:
