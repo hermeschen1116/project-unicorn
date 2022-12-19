@@ -1,7 +1,7 @@
 from typing import Optional
 
+import lightning
 import numpy as np
-import pytorch_lightning as pl
 from pandas import DataFrame
 from torch import Tensor
 from torch.utils.data import DataLoader, Dataset, random_split
@@ -9,8 +9,8 @@ from torch.utils.data import DataLoader, Dataset, random_split
 
 class CSVDataset(Dataset):
 	def __init__(self, data_set: DataFrame, label_feature: str):
-		self.__data: Tensor = Tensor(data_set.drop(label_feature, axis=1).astype(np.float).to_numpy().reshape(-1, 1, len(data_set.columns) - 1))
-		self.__label: Tensor = Tensor(data_set[label_feature].astype(np.int).to_numpy())
+		self.__data: Tensor = Tensor(data_set.drop(label_feature, axis=1).astype(np.float32).to_numpy().reshape(-1, 1, len(data_set.columns) - 1))
+		self.__label: Tensor = Tensor(data_set[label_feature].astype(np.int32).to_numpy())
 
 	def __getitem__(self, index) -> (Tensor, Tensor):
 		return self.__data[index], self.__label[index]
@@ -19,7 +19,7 @@ class CSVDataset(Dataset):
 		return len(self.__label)
 
 
-class DataModule(pl.LightningDataModule):
+class DataModule(lightning.LightningDataModule):
 	def __init__(self, data: DataFrame, train_partition: float = 0.8, num_worker: int = 4, batch_size: int = 8):
 		super().__init__()
 		self.save_hyperparameters()
@@ -52,5 +52,5 @@ class DataModule(pl.LightningDataModule):
 	def test_dataloader(self) -> DataLoader:
 		return DataLoader(self.__test_set, batch_size=self.__batch_size, num_workers=self.__num_worker)
 
-# def predict_dataloader(self) -> DataLoader:
-# 	return DataLoader(self.__predict_set, batch_size=self.__batch_size, num_workers=self.__num_worker)
+	# def predict_dataloader(self) -> DataLoader:
+	# 	return DataLoader(self.__predict_set, batch_size=self.__batch_size, num_workers=self.__num_worker)

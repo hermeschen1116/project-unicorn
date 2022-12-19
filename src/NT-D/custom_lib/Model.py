@@ -1,18 +1,17 @@
+import lightning
 import numpy
-import pytorch_lightning as pl
-from pl_bolts.models import LinearRegression
 from torch import optim, nn, Tensor
 from torchmetrics.classification import BinaryAccuracy
 
 
-class Model(pl.LightningModule):
+class Model(lightning.LightningModule):
 	def __init__(self, learning_rate: float = 1e-4):
 		super(Model, self).__init__()
 
 		# predefined variables
 		self.learning_rate: float = learning_rate
 		# model
-		self.__linear = LinearRegression(input_dim=7, num_classes=2)
+		self.__linear = nn.Linear(7, 1)
 		self.__relu = nn.ReLU()
 		self.__loss_fn = nn.BCELoss()
 
@@ -44,7 +43,7 @@ class Model(pl.LightningModule):
 
 		return {'loss': train_loss}
 
-	def validation_step(self, input_batch, input_batch_idx) -> dict:
+	def validation_step(self, input_batch, input_batch_idx, dataloader_idx: int = 0) -> dict:
 		# forward
 		data_batch, label_batch = input_batch
 		predict_batch = self.forward(data_batch)
@@ -59,7 +58,7 @@ class Model(pl.LightningModule):
 	def on_test_epoch_start(self) -> None:
 		print('Test starts')
 
-	def test_step(self, input_batch, input_batch_idx) -> dict:
+	def test_step(self, input_batch, input_batch_idx, dataloader_idx: int = 0) -> dict:
 		# forward
 		data_batch, label_batch = input_batch
 		predict_batch = self.forward(data_batch)
@@ -72,7 +71,7 @@ class Model(pl.LightningModule):
 		all_truth: Tensor = self.stack_output([batch['truth_batch'] for batch in batch_output])
 		metric = BinaryAccuracy()
 		accuracy = metric(all_predict, all_truth)
-		self.log('Accuracy', accuracy, on_epoch=True, on_step=True, prog_bar=True)
+		self.log('Accuracy', accuracy, on_epoch=True, prog_bar=True)
 		print('Test Accuracy: {:.2f}'.format(accuracy))
 
 	def on_test_epoch_end(self) -> None:
@@ -83,6 +82,7 @@ class Model(pl.LightningModule):
 
 	def predict_step(self, input_data, input_data_idx, dataloader_idx: int = 0) -> dict:
 		output = self.forward(input_data)
+		output = self.__relu(output)
 
 		return output
 
