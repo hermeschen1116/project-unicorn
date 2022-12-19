@@ -1,5 +1,5 @@
+import numpy
 import pytorch_lightning as pl
-import torch
 from pl_bolts.models import LinearRegression
 from torch import optim, nn, Tensor
 from torchmetrics.classification import BinaryAccuracy
@@ -12,50 +12,49 @@ class Model(pl.LightningModule):
 		# predefined variables
 		self.learning_rate: float = learning_rate
 		# model
-		self.__model = LinearRegression(input_dim=6, num_classes=2)
+		self.__linear = LinearRegression(input_dim=7, num_classes=2)
+		self.__relu = nn.ReLU()
 		self.__loss_fn = nn.BCELoss()
 
 	def configure_optimizers(self):
 		return optim.Adam(self.parameters(), lr=self.learning_rate)
 
 	def forward(self, input_batch):
-		output = self.__model(input_batch)
+		output = self.__linear(input_batch)
 
 		return output
 
-	def on_train_epoch_start(self) -> None:
-		print('Epoch: {} starts'.format(self.current_epoch))
+	@staticmethod
+	def stack_output(output: list) -> Tensor:
+		concat_list: list = []
+		for o in output:
+			concat_list += o.tolist()
+
+		return Tensor(numpy.array(concat_list))
 
 	def training_step(self, input_batch, input_batch_idx) -> dict:
 		# forward
 		data_batch, label_batch = input_batch
 		predict_batch = self.forward(data_batch)
-		train_loss = self.__loss_fn(predict_batch, label_batch)
+		predict_batch = self.__relu(predict_batch)
+		train_loss = self.__loss_fn(predict_batch.flatten(), label_batch)
 
 		# log
 		self.log('loss', train_loss, on_step=True, on_epoch=True, prog_bar=True)
 
 		return {'loss': train_loss}
 
-	def on_train_epoch_end(self) -> None:
-		print('Train ends')
-
-	def on_validation_epoch_start(self) -> None:
-		print('Epoch: {} starts'.format(self.current_epoch))
-
 	def validation_step(self, input_batch, input_batch_idx) -> dict:
 		# forward
 		data_batch, label_batch = input_batch
 		predict_batch = self.forward(data_batch)
-		valid_loss = self.__loss_fn(predict_batch, label_batch)
+		predict_batch = self.__relu(predict_batch)
+		valid_loss = self.__loss_fn(predict_batch.flatten(), label_batch)
 
 		# log
 		self.log('valid_loss', valid_loss, on_step=True, on_epoch=True, prog_bar=True)
 
 		return {'valid_loss': valid_loss}
-
-	def on_validation_epoch_end(self) -> None:
-		print('Validation ends')
 
 	def on_test_epoch_start(self) -> None:
 		print('Test starts')
@@ -64,12 +63,13 @@ class Model(pl.LightningModule):
 		# forward
 		data_batch, label_batch = input_batch
 		predict_batch = self.forward(data_batch)
+		predict_batch = self.__relu(predict_batch)
 
-		return {'truth_batch': data_batch, 'predict_batch': predict_batch}
+		return {'truth_batch': label_batch, 'predict_batch': predict_batch.flatten()}
 
 	def test_epoch_end(self, batch_output) -> None:
-		all_truth: Tensor = torch.stack([batch['truth_batch'] for batch in batch_output], dim=-1)
-		all_predict: Tensor = torch.stack([batch['predict_batch'] for batch in batch_output], dim=-1)
+		all_predict: Tensor = self.stack_output([batch['predict_batch'] for batch in batch_output])
+		all_truth: Tensor = self.stack_output([batch['truth_batch'] for batch in batch_output])
 		accuracy = BinaryAccuracy()
 		print('Test Accuracy: {:.2f}'.format(accuracy(all_predict, all_truth)))
 
