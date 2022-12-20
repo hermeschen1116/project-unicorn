@@ -11,17 +11,19 @@ class Model(lightning.LightningModule):
 		# predefined variables
 		self.learning_rate: float = learning_rate
 		# model
-		self.__linear = nn.Linear(7, 1)
-		self.__relu = nn.ReLU()
-		self.__loss_fn = nn.BCELoss()
+		self.linear_1 = nn.Linear(7, 5)
+		self.linear_2 = nn.Linear(5, 1)
+		self.activation = nn.Sigmoid()
+		self.loss_fn = nn.BCELoss()
 
 	def configure_optimizers(self):
 		return optim.Adam(self.parameters(), lr=self.learning_rate)
 
 	def forward(self, input_batch):
-		output = self.__linear(input_batch)
+		linear_output = self.linear_1(input_batch)
+		linear_output = self.linear_2(linear_output)
 
-		return output
+		return self.activation(linear_output)
 
 	@staticmethod
 	def stack_output(output: list) -> Tensor:
@@ -31,12 +33,11 @@ class Model(lightning.LightningModule):
 
 		return Tensor(numpy.array(concat_list))
 
-	def training_step(self, input_batch, input_batch_idx) -> dict:
+	def training_step(self, input_batch, input_batch_idx, dataloader_idx: int = 0) -> dict:
 		# forward
 		data_batch, label_batch = input_batch
 		predict_batch = self.forward(data_batch)
-		predict_batch = self.__relu(predict_batch)
-		train_loss = self.__loss_fn(predict_batch.flatten(), label_batch)
+		train_loss = self.loss_fn(predict_batch.flatten(), label_batch)
 
 		# log
 		self.log('loss', train_loss, on_epoch=True, on_step=True, prog_bar=True)
@@ -47,8 +48,7 @@ class Model(lightning.LightningModule):
 		# forward
 		data_batch, label_batch = input_batch
 		predict_batch = self.forward(data_batch)
-		predict_batch = self.__relu(predict_batch)
-		valid_loss = self.__loss_fn(predict_batch.flatten(), label_batch)
+		valid_loss = self.loss_fn(predict_batch.flatten(), label_batch)
 
 		# log
 		self.log('valid_loss', valid_loss, on_epoch=True, on_step=True, prog_bar=True)
@@ -62,7 +62,6 @@ class Model(lightning.LightningModule):
 		# forward
 		data_batch, label_batch = input_batch
 		predict_batch = self.forward(data_batch)
-		predict_batch = self.__relu(predict_batch)
 
 		return {'truth_batch': label_batch, 'predict_batch': predict_batch.flatten()}
 
@@ -72,7 +71,7 @@ class Model(lightning.LightningModule):
 		metric = BinaryAccuracy()
 		accuracy = metric(all_predict, all_truth)
 		self.log('Accuracy', accuracy, on_epoch=True, prog_bar=True)
-		print('Test Accuracy: {:.2f}'.format(accuracy))
+		print('Test Accuracy: {:.2f}%'.format(accuracy * 100))
 
 	def on_test_epoch_end(self) -> None:
 		print('Test ends')
@@ -82,7 +81,6 @@ class Model(lightning.LightningModule):
 
 	def predict_step(self, input_data, input_data_idx, dataloader_idx: int = 0) -> dict:
 		output = self.forward(input_data)
-		output = self.__relu(output)
 
 		return output
 
