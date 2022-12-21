@@ -16,8 +16,8 @@ class ModelHandler(BaseHandler):
 		self.context = context
 		self.initialized = True
 
-	def preprocess(self, data) -> Tensor:
-		input_data: dict = json.load(data)
+	def preprocess(self, request) -> Tensor:
+		input_data: dict = json.load(request)
 
 	def inference(self, model_input):
 		return self.model(model_input)
