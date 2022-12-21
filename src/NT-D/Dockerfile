@@ -1,9 +1,9 @@
 # base image
-# use FROM pytorch/torchserve:latest-gpu for GPU support
-FROM pytorch/torchserve:latest
+FROM pytorch/torchserve-nightly:latest
+MAINTAINER Hermes Chen
 
 # install dependencies
-RUN pip3 install numpy pandas seaborn lightning tensorboard torch-model-archiver-nightly torch-workflow-archiver-nightly torchserve-nightly
+RUN pip3 install numpy pandas seaborn lightning tensorboard torch-model-archiver-nightly torch-workflow-archiver-nightly
 RUN pip3 install -U --pre torch torchaudio torchvision --extra-index-url https://download.pytorch.org/whl/nightly/cpu
 
 # copy model archive
