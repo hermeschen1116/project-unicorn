@@ -14,7 +14,7 @@ def count_special_char(name: str) -> int:
 	return special_char_count
 
 
-eel.init("../fp_front")
+eel.init("../La+ Program")
 
 @eel.expose
 # below should be our model
