@@ -72,10 +72,10 @@ class ModelHandler(BaseHandler):
 		with torch.no_grad():
 			return self.model(scaled_data)
 
-	def postprocess(self, inference_output):
-		return array(inference_output.item())
+	def postprocess(self, inference_output) -> list:
+		return [inference_output.item() * 100]
 
-	def handle(self, data, context):
+	def handle(self, data, context) -> list:
 		model_input: Tensor = self.preprocess(data)
 		model_output = self.inference(model_input)
 
