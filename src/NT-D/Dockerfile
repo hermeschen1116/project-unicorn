@@ -9,8 +9,8 @@ USER model-server
 
 # install dependencies
 RUN pip3 install -U --no-warn-script-location pip wheel setuptools && \
-    pip3 install -U --no-warn-script-location numpy pandas seaborn lightning torch-model-archiver torch-workflow-archiver && \
-    pip3 install -U --no-warn-script-location --pre torch torchaudio torchvision --extra-index-url https://download.pytorch.org/whl/nightly/cpu
+    pip3 install -U --no-warn-script-location pandas seaborn lightning torch-model-archiver && \
+    pip3 install -U --no-warn-script-location --pre torch --extra-index-url https://download.pytorch.org/whl/nightly/cpu
 
 COPY NT-D.mar /home/model-server/store
 
