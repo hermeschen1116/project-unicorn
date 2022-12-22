@@ -5,8 +5,8 @@
         </title>
         <style>
             .head{
-                background-color: rgb(3, 171, 171);
-                color: rgb(195, 197, 233);
+                background-color: rgb(27, 73, 101);
+                color: rgb(202, 233, 255);
                 font-weight: bold;
                 font-size: 30px;
                 text-align: center;
@@ -24,11 +24,11 @@
         <script type = "text/javascript" src = "main.js"></script>
         <script type = "text/javascript" src = "/eel.js"></script>
     </head>
-    <body style="margin: 0px; background-color:rgb(184, 196, 196)">
-        <img src="./unicorn.png" style="position:fixed; bottom: 0px; right: 0px; " width="200">
+    <body style="margin: 0px; background-color:rgb(240, 240, 240)">
+        <img src="./unicorn.png" style="position:fixed; bottom: 0px; right: 0px; " width="100">
         <div class="head">
             <h1>
-                Unicorn
+                La+ Program
             </h1>
         </div>
 
@@ -41,36 +41,47 @@
     
             <div class="askbox">
                 <h3>Founded Year</h3>
-                <input type="date" id="Founded_Year"></input>
-            </div>
-    
-            <div class="askbox">
-                <h3>City</h3>
-                <input type="text" id="City"></input>
+                <input type="number" min="1900" max="2022" step="1" value="2022" id="Founded_Year"/></input>
             </div>
     
             <div class="askbox">
                 <h3>Nation</h3>
-                <input type="text" id="Nation"></input>
+                <select name="Nation" class="form-control" id="Nation">
+                    <option selected disabled value="0" label="Select a country... " selected="selected">Select a country... </option>
+                    <optgroup id="country-optgroup-Americas" label="Americas">
+                        <option value="0" label="United States">United States</option>
+                    </optgroup>
+                    <optgroup id="country-optgroup-Asia" label="Asia">
+                        <option value="1" label="China">China</option>
+                    </optgroup>
+                </select>
             </div>
-    
-            <!--
+            
             <div class="askbox">
-                <h3>Industry</h3>
-                <input type="text" id="Industry"></input>
+                <h3>City</h3>
+                <select name="City" class="form-control" id="City">
+                    <option selected disabled value="0" label="Select a city... " selected="selected">Select a city... </option>
+                    <optgroup id="city-optgroup-US" label="United States">
+                        <option value="0" label="SF">San Francisco</option>
+                        <option value="1" label="NY">New York</option>
+                    </optgroup>
+                    <optgroup id="city-optgroup-China" label="China">
+                        <option value="2" label="China">Else</option>
+                    </optgroup>
+                </select>
             </div>
-            -->
-            <div class="askbox">
-                <h3>Industry</h3>
-                <select id="Industry">
-                    <option>PLEASE SELECT AN OPTION</option>
-                    <option>artificial intelligence</option>
-                    <option>fintech</option>
-                    <option>internet software & services</option>
-                    <option>analytics</option>
-                    <option>biotechnology</option>
-                    <option>health care</option>
-                    <option>e-commerce & direct-to-consumer</option>
+
+        <div class="askbox">
+            <h3>Industry</h3>
+            <select id="Industry">
+                <option selected disabled>Select an option...</option>
+                    <option value="0">Artificial intelligence</option>
+                    <option value="1">Fintech</option>
+                    <option value="2">Internet software & services</option>
+                    <option value="3">Analytics</option>
+                    <option value="4">Biotechnology</option>
+                    <option value="5">Health care</option>
+                    <option value="6">E-commerce & Direct-to-consumer</option>
                 </select>
             </div>
             
@@ -83,39 +94,47 @@
             <div class="askbox">
                 <h3>Investory</h3>
                 <select id="Investory">
-                    <option>PLEASE SELECT AN OPTION</option>
-                    <option>andreessen horowitz</option>
-                    <option>techstars</option>
-                    <option>alumni ventures</option>
-                    <option>y combinator</option>
-                    <option>sequoia capital</option>
-                    <option>500 global</option>
-                    <option>insight partners</option>
+                    <option selected disabled>Select an option...</option>
+                    <option value = "0">Andreessen horowitz</option>
+                    <option value = "1">Techstars</option>
+                    <option value = "2">Alumni ventures</option>
+                    <option value = "3">Y combinator</option>
+                    <option value = "4">Sequoia capital</option>
+                    <option value = "5">500 global</option>
+                    <option value = "6">Insight partners</option>
                 </select>
             </div>
     
             <div class="askbox">
                 <h3>Total Founding</h3>
-                <input type="text" id="Total_Founding"></input>
+                <input type="number" id="Total_Founding"></input>
             </div>
         
             <div class="askbox">
                 <h3>Company Type</h3>
-                <input type="text" id="Company_Type"></input>
+                <select id="Company_Type">
+                    <option selected disabled>Select an option...</option>
+                    <option>For profit</option>
+                    <option>Non-profit</option>
+                </select>
             </div>
     
             <div class="askbox">
                 <h3>Operating Status</h3>
-                <input type="text" id="Operating_Status"></input>
+                <select id="Operating_Status">
+                    <option selected disabled>Select an option...</option>
+                    <option value="1" style="color:green">Active</option>
+                    <option value="0" style="color:red">Closed</option>
+                </select>
             </div>
     
             <div class="askbox">
                 <h3>Last Valuation</h3>
-                <input type="text" id="Last_Valuation"></input>
+                <input type="number" id="Last_Valuation"></input>
             </div>
             
             <div class="askbox">
-                <h3>Other</h3>
+                <h3>Feedback</h3>
                 <textarea id="trash"></textarea>
             </div>
         </div>
@@ -130,10 +149,9 @@
         
         
         <div class="content">
-            <h2>Probability of Becoming Unicorn</h2>
+            <h2>Probability of Becoming an Unicorn</h2>
             <h3 id="res">HERE</h3>
         </div>
-
 
 
     </body>
