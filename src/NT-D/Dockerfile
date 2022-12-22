@@ -19,7 +19,8 @@ RUN pip3 install -U --no-warn-script-location pip wheel setuptools && \
     pip3 install -U --no-warn-script-location --pre torch torchaudio torchvision --extra-index-url https://download.pytorch.org/whl/nightly/cpu
 
 # create mar file
-RUN torch-model-archiver --model-name 'NT-D' --version 1.0 \
+RUN mkdir /model-server/model-store/ && \
+	torch-model-archiver --model-name 'NT-D' --version 1.0 \
     --serialized-file=/home/model-server/production.pt \
     --handler=/home/model-server/handler.py \
     --export-path=/home/model-server/model-store
