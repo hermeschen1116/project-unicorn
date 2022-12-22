@@ -36,7 +36,7 @@ class ModelHandler(BaseHandler):
 		# Industry
 		model_input[4] = int(input_data['industry'])
 		# Investor
-		model_input[3] = int(input_data['investory'])
+		model_input[3] = int(input_data['investor'])
 		# Last Valuation
 		half = sqrt(10)
 		scientific: list = '{:e}'.format(int(input_data['last_valuation'])).split('e')
