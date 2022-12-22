@@ -3,10 +3,6 @@ FROM pytorch/torchserve:latest
 MAINTAINER Hermes Chen
 
 VOLUME [ "/home/model-server/" ]
-WORKDIR /home/
-
-# copy model and related files
-COPY production.pt handler.py /home/model-server/
 
 # save config
 USER root
@@ -18,6 +14,9 @@ RUN pip3 install -U --no-warn-script-location pip wheel setuptools && \
     pip3 install -U --no-warn-script-location numpy pandas seaborn lightning torch-model-archiver torch-workflow-archiver && \
     pip3 install -U --no-warn-script-location --pre torch torchaudio torchvision --extra-index-url https://download.pytorch.org/whl/nightly/cpu
 
+WORKDIR /home/
+# copy model and related files
+COPY production.pt handler.py /home/model-server/
 # create mar file
 RUN mkdir /model-server/model-store/ && \
 	torch-model-archiver --model-name 'NT-D' --version 1.0 \
