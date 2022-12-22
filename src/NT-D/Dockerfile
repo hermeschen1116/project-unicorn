@@ -23,7 +23,8 @@ RUN mkdir /model-server/model-store/ && \
 	torch-model-archiver --model-name 'NT-D' --version 1.0 \
     --serialized-file=/home/model-server/production.pt \
     --handler=/home/model-server/handler.py \
-    --export-path=/home/model-server/model-store
+    --export-path=/home/model-server/model-store && \
+    cd .. && rm production.pt && rm handler.py
 
 EXPOSE 8080
 CMD ["torchserve", "--start", "--ncs", "--ts-config=/home/model-server/config.properties", "--model-store", "home/model-server/model-store"]
