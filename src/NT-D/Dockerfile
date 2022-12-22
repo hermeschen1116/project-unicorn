@@ -8,7 +8,7 @@ RUN pip3 install -U --pre torch torchaudio torchvision --extra-index-url https:/
 
 # copy model and related files
 COPY production.pt /home/model-store/
-COPY handler.py /home/model-store/
+#COPY handler.py /home/model-store/
 
 # create mar file
 WORKDIR /home/model-store/
