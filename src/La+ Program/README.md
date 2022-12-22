@@ -6,7 +6,7 @@ test for py getting value from html
 where the model use the feature to predict
 
 #html file
-不會設置版面啦
+La+ Program UI
 
 #javascript file
 js is getting values(elements), deal with button event
