@@ -11,12 +11,8 @@ COPY production.pt /home/model-store/
 COPY handler.py /home/model-store/
 
 # create mar file
-WORKDIR /home/model-server/
+WORKDIR /home/model-store/
 RUN torch-model-archiver --model-name 'NT-D' --version 1.0  --serialized-file production.pt --handler handler.py
 
-# run Torchserve upon running the container
-CMD ["torchserve",
-     "--start",
-     "--ncs",
-     "--models-store",
-     "model-store"]
+EXPOSE 8080
+CMD ["torchserve", "--start", "--ncs", "--models-store", "model-store"]
