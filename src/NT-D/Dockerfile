@@ -20,4 +20,4 @@ RUN torch-model-archiver --model-name 'NT-D' --version 1.0 \
     --export-path=/home/model-server/model-store
 
 EXPOSE 8080
-CMD ["torchserve", "--start", "--ncs", "--ts-config=/home/model-server/config.properties", "--models-store", "model-server"]
+CMD ["torchserve", "--start", "--ncs", "--ts-config=/home/model-server/config.properties", "--models-store", "model-server/model-store"]
