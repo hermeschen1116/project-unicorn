@@ -9,11 +9,13 @@ USER model-server
 
 # install dependencies
 RUN pip3 install -U --no-warn-script-location pip wheel setuptools && \
-    pip3 install -U --no-warn-script-location numpy pandas seaborn lightning torch-model-archiver torch-workflow-archiver && \
+    pip3 install -U --no-warn-script-location numpy pandas seaborn lightning torch-model-archiver-nightly torch-workflow-archiver-nightly && \
     pip3 install -U --no-warn-script-location --pre torch torchaudio torchtext torchvision--extra-index-url https://download.pytorch.org/whl/nightly/cpu
 
 COPY handler.py production.pt /home/model-server/model-store/
-RUN torch-model-archiver \
+WORKDIR /home/model-server/
+RUN mkdir model-store && \
+	torch-model-archiver \
     --model-name NT-D \
     --version 1.0 \
     --serialized-file production.pt \
