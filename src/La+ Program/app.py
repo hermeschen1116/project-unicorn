@@ -1,3 +1,7 @@
+# changelog:
+# investory to investor in JSON
+# fix country not passing value
+
 # importing library
 import eel
 import numpy
@@ -18,21 +22,15 @@ def count_special_char(name: str) -> int:
 path = os.path.dirname(os.path.abspath(__file__))
 print(path)
 
-
-name_length = 0
-name_sp = ""
-country_value = 0
-
-
-def buildJSON(name, name_length, name_sp, nation, city, industry, investory, ls, fb) :
+def buildJSON(name, name_length, name_sp, nation, city, industry, investor, ls, fb) :
     myDict = {
     "name": name,
     "name_len": name_length,
     "name_sp": name_sp,
-    "country": country_value,
+    "country": nation,
     "city": city, 
     "industry": industry,
-    "investory":investory,
+    "investor":investor,
     "last_valuation":ls,
     "feedback":fb
     }
@@ -42,7 +40,7 @@ def buildJSON(name, name_length, name_sp, nation, city, industry, investory, ls,
         
 @eel.expose
 # below should be our model
-def pred(name,fy,city,nation,industry,founder,investory,tf,ct,os,ls,fb):
+def pred(name,fy,city,nation,industry,founder,investor,tf,ct,os,ls,fb):
     #frame = name,fy,city,nation,industry,founder,investory,tf,ct,os,ls
     #feature truly used:
     # name_len
@@ -60,7 +58,7 @@ def pred(name,fy,city,nation,industry,founder,investory,tf,ct,os,ls,fb):
     # special char counts of company name
     name_sp = count_special_char("".join(name))
 
-    buildJSON(name, name_length, name_sp, nation, city, industry, investory, ls, fb)
+    buildJSON(name, name_length, name_sp, nation, city, industry, investor, ls, fb)
     
     output = "Prediction result should be here"
     return output

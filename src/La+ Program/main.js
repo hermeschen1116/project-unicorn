@@ -5,7 +5,7 @@ async function fit(){
     var nation = document.getElementById("Nation").value
     var industry = document.getElementById("Industry").value
     var founder = document.getElementById("Founder").value
-    var investory = document.getElementById("Investory").value
+    var investory = document.getElementById("Investor").value
     var tf = document.getElementById("Total_Founding").value
     var ct = document.getElementById("Company_Type").value
     var os = document.getElementById("Operating_Status").value
