@@ -17,4 +17,5 @@ RUN torch-model-archiver --model-name 'NT-D' --version 1.0  --serialized-file pr
 # run Torchserve upon running the container
 CMD ["torchserve",
      "--start",
-     "--models my_model=NT-D.mar"]
+     "--models-store",
+     "model-server"]
