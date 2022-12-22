@@ -4,6 +4,7 @@ on:
     - cron: "16 3 * * *"
   push:
     branches: [ main ]
+    tags: [ 'v*.*.*' ]
 
 env:
   REGISTRY: ghcr.io
