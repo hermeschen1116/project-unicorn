@@ -10,8 +10,7 @@ RUN pip3 install -U --pre torch torchaudio torchvision --extra-index-url https:/
 
 # copy model and related files
 WORKDIR /home/model-server
-COPY production.pt /home/model-server
-COPY handler.py /home/model-server
+COPY production.pt handler.py /home/model-server/
 
 # create mar file
 RUN torch-model-archiver --model-name 'NT-D' --version 1.0  --serialized-file production.pt --handler handler.py
