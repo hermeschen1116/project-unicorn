@@ -6,7 +6,7 @@ MAINTAINER Hermes Chen
 COPY production.pt handler.py /home/model-server/
 
 # install dependencies
-RUN pip3 install numpy pandas seaborn lightning tensorboard torch-model-archiver torch-workflow-archiver
+RUN pip3 install numpy pandas seaborn lightning torch-model-archiver torch-workflow-archiver
 RUN pip3 install -U --pre torch torchaudio torchvision --extra-index-url https://download.pytorch.org/whl/nightly/cpu
 
 # save config
