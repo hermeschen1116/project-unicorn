@@ -20,7 +20,7 @@ RUN mkdir model-store && \
     --version 1.0 \
     --serialized-file production.pt \
     --handler handler.py \
-    --export-path model_store
+    --export-path model-store/
 
 EXPOSE 8080
 CMD ["torchserve", "--start", "--ncs", "--ts-config=/home/model-server/config.properties", "--model-store", "home/model-server/model-store"]
