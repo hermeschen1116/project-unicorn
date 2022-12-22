@@ -39,6 +39,7 @@ jobs:
 
       - name: Docker Metadata action
         uses: docker/metadata-action@master
+        id: meta
         with:
           images: ${{ matrix.image }}
 
