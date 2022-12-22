@@ -10,8 +10,7 @@ RUN printf "\nservice_envelope=json" >> /home/model-server/config.properties
 USER model-server
 
 # install dependencies
-RUN pip3 install -U --no-warn-script-location numpy pandas seaborn lightning torch-model-archiver torch-workflow-archiver && \
-    pip3 install -U --no-warn-script-location --pre torch torchaudio torchtext torchvision--extra-index-url https://download.pytorch.org/whl/nightly/cpu
+RUN pip3 install -U --no-warn-script-location numpy pandas seaborn lightning torch-model-archiver torch-workflow-archiver
 
 WORKDIR /home/
 RUN torch-model-archiver --model-name 'NT-D' --version 1.0 \
