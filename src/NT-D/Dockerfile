@@ -2,6 +2,8 @@
 FROM pytorch/torchserve:latest
 MAINTAINER Hermes Chen
 
+VOLUME [ "/home/model-server/" ]
+
 # copy model and related files
 COPY production.pt handler.py /home/model-server/
 
