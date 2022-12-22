@@ -15,7 +15,7 @@ def count_special_char(name: str) -> int:
 
 	return special_char_count
 
-path = os.path.dirname(os.path.realpath('__file__'))
+path = os.path.dirname(os.path.abspath(__file__))
 print(path)
 
 
@@ -36,8 +36,8 @@ def buildJSON(name, name_length, name_sp, nation, city, industry, investory, ls,
     "last_valuation":ls,
     "feedback":fb
     }
-    # 將 Python 資料轉為 JSON 格式，儲存至 output.json 檔案
-    with open("output.json", "w") as f:
+
+    with open(path + "\output.json", "w") as f:
         json.dump(myDict, f, indent = 4)
         
 @eel.expose
@@ -62,7 +62,7 @@ def pred(name,fy,city,nation,industry,founder,investory,tf,ct,os,ls,fb):
 
     buildJSON(name, name_length, name_sp, nation, city, industry, investory, ls, fb)
     
-    output = "here should be prediction"
+    output = "Prediction result should be here"
     return output
 
 eel.init(path)
