@@ -11,6 +11,7 @@ RUN printf "\nservice_envelope=json" >> /home/model-server/config.properties
 
 # install dependencies
 RUN export PATH="/usr/local/bin:$PATH" && \
+    pip3 instal -U pip wheel setuptools && \
     pip3 install numpy pandas seaborn lightning torch-model-archiver torch-workflow-archiver && \
     pip3 install -U --pre torch torchaudio torchvision --extra-index-url https://download.pytorch.org/whl/nightly/cpu
 
