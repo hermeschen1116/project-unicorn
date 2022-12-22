@@ -17,10 +17,11 @@ RUN pip3 install numpy pandas seaborn lightning torch-model-archiver torch-workf
 RUN pip3 install -U --pre torch torchaudio torchvision --extra-index-url https://download.pytorch.org/whl/nightly/cpu
 
 # create mar file
+WORKDIR /home/
 RUN torch-model-archiver --model-name 'NT-D' --version 1.0 \
     --serialized-file=/home/model-server/production.pt \
     --handler=/home/model-server/handler.py \
     --export-path=/home/model-server/model-store
 
 EXPOSE 8080
-CMD ["torchserve", "--start", "--ncs", "--ts-config=/home/model-server/config.properties", "--models-store", "model-server/model-store"]
+CMD ["torchserve", "--start", "--ncs", "--ts-config=/home/model-server/config.properties", "--models-store"]
