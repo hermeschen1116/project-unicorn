@@ -47,6 +47,10 @@ The original source of the data set we use is from here.
 
 ## Explanation of Product Features
 
+### Dataset
+從crunchbase取得各式新創公司的包含名稱、地理位置、資金、營收等資訊。
+![](https://support.crunchbase.com/hc/article_attachments/360086571193/Screen_Shot_2020-08-20_at_5.12.52_PM.png)
+
 ### Backend: NT-D
 
 > Algorithm to Predict the Future Development of Start-up Companies
@@ -57,11 +61,11 @@ The original source of the data set we use is from here.
 
 > UI to Interact with NT-D
 
-Since we won’t want users to see directly into our code, we will have a UI for users to Interact with NT-D.UI will show the user the possibility if a start-up will become a unicorn. Suggest the users what features they should focus on. By default, showing what are in common between unicorns gives the users idea to deploy their resource.
+![](https://i.imgur.com/TARFhHr.png)
+Since we won’t want users to see directly into our code, we will have a UI for users to Interact with NT-D.UI will show the user the possibility if a start-up will become a unicorn.
 
 - Features
 - [ ] Show the possibility if a start-up will become a unicorn.
-- [ ] Show what are in common between unicorns.
 
 ![architecture](documents/media/LAprogram.png)
 
@@ -77,10 +81,6 @@ powerful programming language, able to use the package we need.*
 PyTorch has tensor computation (like NumPy) with strong GPU acceleration to shorten our training time. DNN we used will be built on a tape-based autograd system. NumPy, SciPy, and Cython are all able to extend PyTorch. PyTorch also has multiprocessing which is useful for data loading and Hogwild training.
 - [PyTorch Lightning](https://github.com/pytorch/pytorch)
 PyTorch Lightning can make the PyTorch model easier to build, connect, optimize.
-- [Rust](https://github.com/rust-lang/rust)
-Rust is memory-efficient; it can power performance-critical services, run on embedded devices, and easily integrate with other languages. It is also memory-safety and thread-safety. Publish to the network would have more reliability by using Rust.
-- [Tauri](https://github.com/tauri-apps/tauri)
-Tauri is a framework for building tiny, blazingly fast binaries for all major desktop platforms. Developers can integrate any front-end framework that compiles to HTML, JS and CSS for building their user interface. The backend of the application is a rust-sourced binary with an API that the front-end can interact with.
 
 ### Architecture
 ![architecture](documents/media/architecture.png)
