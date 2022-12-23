@@ -2,7 +2,7 @@
 FROM pytorch/torchserve:latest
 MAINTAINER Hermes Chen
 
-COPY Docker/handler.py Docker/production.pt ts_config /home/model-server/
+COPY docker_image_src/handler.py Docker/production.pt ts_config /home/model-server/
 
 # install dependencies
 RUN pip3 install -U --no-warn-script-location numpy pandas seaborn lightning torch-model-archiver torch-workflow-archiver
