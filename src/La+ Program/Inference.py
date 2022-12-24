@@ -6,13 +6,12 @@ import os
 
 path = Path(__file__).parent.parent
 model_path = os.path.join(path, 'NT-D', 'docker_image_src', 'production.pt')
-print(path)
 
-def inference():
-    data = pd.read_json('output.json', typ='series')
+def inference(data):
+    print("JSON read\n")
     df = pd.DataFrame([data])
     df = df.drop(['name', 'feedback'], axis=1)
-    print(df)
+    print("Inference output:\n",df)
     list = df.values.tolist()
     nparray = np.array(list).astype(np.int32)
     nparray = nparray[0]

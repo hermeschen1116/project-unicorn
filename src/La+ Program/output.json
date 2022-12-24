@@ -1,11 +1,11 @@
 {
-    "name": "draggindeeznut",
-	"name_len": "14",
-	"name_sp": "0",
-	"country": "0",
-	"city": "2",
-	"industry": "4",
-	"investor": "2",
-	"last_valuation": "69420",
-	"feedback": "imagine draggin deez nutz on your face"
+    "name": "",
+    "name_len": 0,
+    "name_sp": 0,
+    "country": "0",
+    "city": "0",
+    "industry": "Select an option...",
+    "investor": "Select an option...",
+    "last_valuation": "",
+    "feedback": ""
 }
