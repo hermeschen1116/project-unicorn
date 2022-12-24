@@ -63,9 +63,9 @@ def pred(name,fy,city,nation,industry,founder,investor,tf,ct,os,ls,fb):
   
     data = pd.read_json('output.json', typ='series')
     from Inference import inference
-    output = inference(data)
+    output = inference(name_length, name_sp, nation, city, industry, investor, ls)
     
-    print ("{:.3%}".format(output))
+    # print ("{:.3%}".format(output))
     return output
 
 eel.init(path)

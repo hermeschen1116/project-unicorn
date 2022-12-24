@@ -1,11 +1,11 @@
 {
-    "name": "",
-    "name_len": 0,
-    "name_sp": 0,
+    "name": "1324",
+    "name_len": 4,
+    "name_sp": 4,
     "country": "0",
-    "city": "0",
-    "industry": "Select an option...",
-    "investor": "Select an option...",
-    "last_valuation": "",
+    "city": "1",
+    "industry": "2",
+    "investor": "0",
+    "last_valuation": "1234",
     "feedback": ""
 }
