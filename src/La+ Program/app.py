@@ -7,6 +7,7 @@ import eel
 import numpy
 import os
 from math import sqrt
+from Inference import inference
 import json
 # initialize
 
@@ -18,7 +19,6 @@ def count_special_char(name: str) -> int:
 			special_char_count += 1
 
 	return special_char_count
-
 path = os.path.dirname(os.path.abspath(__file__))
 print(path)
 
@@ -59,7 +59,8 @@ def pred(name,fy,city,nation,industry,founder,investor,tf,ct,os,ls,fb):
     name_sp = count_special_char("".join(name))
 
     buildJSON(name, name_length, name_sp, nation, city, industry, investor, ls, fb)
-    
+    output = inference()
+    print ("{:.3%}".format(output))
     output = "Prediction result should be here"
     return output
 
