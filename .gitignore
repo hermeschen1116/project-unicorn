@@ -170,4 +170,8 @@ poetry.toml
 ### Pyenv ###
 .python-version
 
+### torchserve ###
+logs/
+*.mar
+
 # End of https://www.toptal.com/developers/gitignore/api/python

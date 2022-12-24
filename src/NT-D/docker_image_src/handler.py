@@ -4,7 +4,6 @@ from math import sqrt
 from typing import Any
 
 import numpy
-import numpy as np
 import torch
 from numpy import array
 from sklearn import preprocessing
@@ -41,19 +40,43 @@ class ModelHandler(BaseHandler):
 		if request_data is None:
 			request_data = request[0].get('body')
 		input_data: dict = json.loads(request_data)
-		model_input: array = numpy.zeros(7, dtype=np.float16)
+		model_input: array = numpy.zeros(7, dtype=int)
 		# Company Name Length
-		model_input[0] = int(input_data['name_len'])
+		model_input[0] = len(input_data['company'])
 		# Company Name Special Characters
-		model_input[1] = int(input_data['name_sp'])
+		special_char: list = ['!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':',
+							  ';', '<', '=', '>', '?', '@']
+		special_char_count: int = 0
+		for c in input_data['company']:
+			if c in special_char:
+				special_char_count += 1
+		model_input[1] = special_char_count
 		# Country
-		model_input[2] = int(input_data['country'])
+		country: dict = {'united states': 0, 'china': 1}
+		if input_data['nation'].lower() in country.keys():
+			model_input[2] = country[input_data['nation'].lower()]
+		else:
+			model_input[2] = len(country)
 		# City
-		model_input[3] = int(input_data['city'])
+		city: dict = {'san francisco': 0, 'new york': 1}
+		if input_data['city'].lower() in city.keys():
+			model_input[3] = city[input_data['city'].lower()]
+		else:
+			model_input[3] = len(city)
 		# Industry
-		model_input[4] = int(input_data['industry'])
+		industry: dict = {'artificial intelligence': 0, 'fintech': 1, 'internet software & services': 2, 'analytics': 3, 'biotechnology': 4, 'health care': 5,
+						  'e-commerce & direct-to-consumer': 6}
+		if input_data['industry'].lower() in industry.keys():
+			model_input[4] = industry[input_data['industry'].lower()]
+		else:
+			model_input[4] = len(industry)
 		# Investor
-		model_input[5] = int(input_data['investor'])
+		investor: dict = {'andreessen horowitz': 0, 'techstars': 1, 'alumni ventures': 2, 'y combinator': 3, 'sequoia capital': 4, '500 global': 5,
+						  'insight partners': 6}
+		if input_data['investor'].lower() in investor.keys():
+			model_input[5] = investor[input_data['investor'].lower()]
+		else:
+			model_input[5] = len(investor)
 		# Last Valuation
 		half = sqrt(10)
 		scientific: list = '{:e}'.format(int(input_data['last_valuation'])).split('e')
@@ -66,17 +89,15 @@ class ModelHandler(BaseHandler):
 		return Tensor(model_input.reshape(1, -1))
 
 	def inference(self, model_input, **kwargs) -> Tensor:
-		data_scaler = preprocessing.MinMaxScaler(feature_range=(0, 1))
-		scaled_data: Tensor = Tensor(array(data_scaler.fit_transform(model_input)))
-
 		with torch.no_grad():
-			return self.model(scaled_data)
+			return self.model(model_input)
 
 	def postprocess(self, inference_output) -> list:
-		return [inference_output.item() * 100]
+		return [output.item() for output in inference_output]
 
 	def handle(self, data, context) -> list:
 		model_input: Tensor = self.preprocess(data)
 		model_output = self.inference(model_input)
+		response: list = self.postprocess(model_output)
 
-		return self.postprocess(model_output)
+		return response
