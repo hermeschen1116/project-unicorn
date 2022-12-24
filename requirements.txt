@@ -1,0 +1,11 @@
+Eel
+jupyter
+lightning
+numpy
+pandas
+pip-review
+scikit-learn
+tensorboard
+torch-model-archiver
+torch-workflow-archiver
+torchserve
